@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class App {
@@ -19,11 +21,12 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 3);
-            System.out.println(person);
+            Person person = new Person("Johny", 39);
+            person.addItem(new Item("Guitar"));
+            person.addItem(new Item("Drum"));
+            person.addItem(new Item("Piano"));
 
-            List<Item> items = person.getItems();
-            System.out.println(items);
+            session.save(person);
 
             session.getTransaction().commit();
 
